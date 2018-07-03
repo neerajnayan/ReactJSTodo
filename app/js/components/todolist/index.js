@@ -1,36 +1,11 @@
-import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import TodoList from './TodoList.js';
-import { getVisibleTodos } from '../../reducers';
-
-class VisibleTodoList extends Component {
-	componentDidMount() {
-		this.fetchData();
-	}
-
-	componentDidUpdate(prevProps) {
-		if (this.props.filter !== prevProps.filter) this.fetchData();
-	}
-
-	fetchData() {
-		const { filter, fetchTodos } = this.props;
-		fetchTodos(filter);
-	}
-
-	render() {
-		const { toggleTodo, ...rest } = this.props;
-		return (
-			<TodoList 
-			  {...rest} 
-			  onTodoClick={toggleTodo} 
-			/>
-		);
-	};
-}
+import VisibleTodoList from './VisibleTodoList.js';
+import { getVisibleTodos, getIsFetching } from '../../reducers';
 
 const mapStateToProps = (state, ownProps) => ({
   todos: getVisibleTodos(state, state.visibilityFilter),
+  isFetching: getIsFetching(state, state.visibilityFilter),
   filter: state.visibilityFilter
 });
 

@@ -17,6 +17,11 @@ export const setVisibilityFilter = (filter) => ({
   filter
 });
 
+export const requestTodos = (filter) => ({
+  type: 'REQUEST_TODOS',
+  filter
+});
+
 const receiveTodos = (filter, response) => ({
 	type: 'RECEIVE_TODOS',
 	filter,
