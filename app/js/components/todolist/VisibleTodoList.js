@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TodoList from './TodoList.js';
+import FetchError from './FetchError';
 
 export default class VisibleTodoList extends Component {
 	componentDidMount() {
@@ -16,9 +17,17 @@ export default class VisibleTodoList extends Component {
 	}
 
 	render() {
-		const { toggleTodo, todos, isFetching } = this.props;
+		const { toggleTodo, errorMessage, todos, isFetching } = this.props;
 		if (isFetching && !todos.length) {
 			return <p>Loading...</p>;
+		}
+		if (errorMessage && !todos.length) {
+			return (
+				<FetchError
+					message={errorMessage}
+					onRetry={() => this.fetchData()}
+				/>
+			);
 		}
 
 		return (

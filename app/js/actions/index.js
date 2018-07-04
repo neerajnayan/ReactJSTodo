@@ -18,17 +18,6 @@ export const setVisibilityFilter = (filter) => ({
   filter
 });
 
-const requestTodos = (filter) => ({
-  type: 'REQUEST_TODOS',
-  filter
-});
-
-const receiveTodos = (filter, response) => ({
-	type: 'RECEIVE_TODOS',
-	filter,
-	response
-});
-
 // Async Action Creator
 // This method fires multiple actions based on the current state.
 // Thunk middleware invoke this function passing dispatch and getState
@@ -38,9 +27,24 @@ export const fetchTodos = (filter) => (dispatch, getState) => {
     return Promise.resolve();
   }
 
-  dispatch(requestTodos(filter));
-
-  return api.fetchTodos(filter).then(response => {
-    dispatch(receiveTodos(filter, response));
+  dispatch({
+    type: 'FETCH_TODOS_REQUEST',
+    filter
   });
+
+  return api.fetchTodos(filter).then(
+    response => {
+      dispatch({
+        type: 'FETCH_TODOS_SUCCESS',
+        filter,
+        response
+      });
+    },
+    error => {
+      dispatch({
+        type: 'FETCH_TODOS_FAILURE',
+        filter,
+        message: error.message || 'Something went wrong'
+      })
+    });
 }

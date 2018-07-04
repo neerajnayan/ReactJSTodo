@@ -1,11 +1,12 @@
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import VisibleTodoList from './VisibleTodoList.js';
-import { getVisibleTodos, getIsFetching } from '../../reducers';
+import { getVisibleTodos, getErrorMessage, getIsFetching } from '../../reducers';
 
 const mapStateToProps = (state, ownProps) => ({
   todos: getVisibleTodos(state, state.visibilityFilter),
   isFetching: getIsFetching(state, state.visibilityFilter),
+  errorMessage:  getErrorMessage(state, state.visibilityFilter),
   filter: state.visibilityFilter
 });
 
