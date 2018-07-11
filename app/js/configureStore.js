@@ -14,11 +14,9 @@ const configureStore = () => {
 
 	const store = createStore(
 		todoApp,
-		// 2nd Parmeter - persisted state (See example above),
-		// 3rd Parameter - (Enhancer)
-		// Enhancers, which adds multiple middleware to
-		// dispatch methods. See custom middleware implementation
-		// wrapDispatchWithMiddlewares above
+		// Enhancers, which adds multiple middleware to dispatch methods.
+		// Each middleware will be given the 'dispatch' and 'getState'
+		// functions as named arguments.
 		applyMiddleware(...middlewares)
 	);
 
