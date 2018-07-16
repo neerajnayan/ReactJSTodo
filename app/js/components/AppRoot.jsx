@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import store from "../store";
-import { addTodo, toggleTodo } from "../actions";
+import { addTodo, toggleTodo, setVisibilityFilter } from "../actions";
+import AddTodo from "./AddTodo";
 import TodoList from "./TodoList";
-import FilterLink from "./FilterLink";
+import Footer from "./Footer";
 
 const getVisibleTodos = (todos, filter) => {
 	switch (filter) {
@@ -15,53 +16,20 @@ const getVisibleTodos = (todos, filter) => {
 	}
 };
 
-class AppRoot extends Component {
-	render() {
-		const { todos, visibilityFilter } = this.props;
-		const visibleTodos = getVisibleTodos(todos, visibilityFilter);
-		return (
-			<div>
-				<input
-					ref={node => {
-						this.input = node;
-					}}
-				/>
-				<button
-					onClick={() => {
-						store.dispatch(addTodo(this.input.value));
-						this.input.value = "";
-					}}
-				>
-					Add TodoList
-				</button>
-				<TodoList
-					todos={visibleTodos}
-					onTodoClick={id => store.dispatch(toggleTodo(id))}
-				/>
-				<p>
-					Show:{" "}
-					<FilterLink
-						filter="SHOW_ALL"
-						currentFilter={visibilityFilter}
-					>
-						All
-					</FilterLink>{" "}
-					<FilterLink
-						filter="SHOW_ACTIVE"
-						currentFilter={visibilityFilter}
-					>
-						Active
-					</FilterLink>{" "}
-					<FilterLink
-						filter="SHOW_COMPLETED"
-						currentFilter={visibilityFilter}
-					>
-						Completed
-					</FilterLink>
-				</p>
-			</div>
-		);
-	}
-}
+const AppRoot = ({ todos, visibilityFilter }) => (
+	<div>
+		<AddTodo onAddClick={todo => store.dispatch(addTodo(todo))} />
+		<TodoList
+			todos={getVisibleTodos(todos, visibilityFilter)}
+			onTodoClick={id => store.dispatch(toggleTodo(id))}
+		/>
+		<Footer
+			visibilityFilter={visibilityFilter}
+			onFilterClick={filter =>
+				store.dispatch(setVisibilityFilter(filter))
+			}
+		/>
+	</div>
+);
 
 export default AppRoot;

@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { setVisibilityFilter } from "../actions";
-import store from "../store";
 
-const FilterLink = ({ filter, currentFilter, children }) => {
+const FilterLink = ({ filter, currentFilter, children, onClick }) => {
 	if (filter === currentFilter) {
 		return <span>{children}</span>;
 	}
@@ -11,7 +10,7 @@ const FilterLink = ({ filter, currentFilter, children }) => {
 			href="#"
 			onClick={e => {
 				e.preventDefault();
-				store.dispatch(setVisibilityFilter(filter));
+				onClick(filter);
 			}}
 		>
 			{children}
