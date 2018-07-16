@@ -6,7 +6,7 @@ import Store from "./store";
 
 function render() {
 	ReactDOM.render(
-		<AppRoot todos={Store.getState().todos} />,
+		<AppRoot {...Store.getState()} />,
 		document.getElementById("app-root")
 	);
 }
