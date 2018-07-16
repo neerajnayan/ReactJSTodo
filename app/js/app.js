@@ -1,8 +1,14 @@
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
-import AppRoot from './components/AppRoot.jsx';
+import AppRoot from "./components/AppRoot.jsx";
+import Store from "./store";
 
-ReactDOM.render(
-  AppRoot,
-  document.getElementById('app-root')
-);
+function render() {
+	ReactDOM.render(
+		<AppRoot todos={Store.getState().todos} />,
+		document.getElementById("app-root")
+	);
+}
+Store.subscribe(render);
+render();
