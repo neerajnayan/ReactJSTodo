@@ -1,6 +1,8 @@
 import React from "react";
+import { addTodo } from "../actions";
+import store from "../store";
 
-const AddTodo = ({ onAddClick }) => {
+const AddTodo = () => {
 	let input;
 
 	return (
@@ -12,7 +14,7 @@ const AddTodo = ({ onAddClick }) => {
 			/>
 			<button
 				onClick={() => {
-					onAddClick(input.value);
+					store.dispatch(addTodo(input.value));
 					input.value = "";
 				}}
 			>
