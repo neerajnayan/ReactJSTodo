@@ -23,12 +23,7 @@ const AppRoot = ({ todos, visibilityFilter }) => (
 			todos={getVisibleTodos(todos, visibilityFilter)}
 			onTodoClick={id => store.dispatch(toggleTodo(id))}
 		/>
-		<Footer
-			visibilityFilter={visibilityFilter}
-			onFilterClick={filter =>
-				store.dispatch(setVisibilityFilter(filter))
-			}
-		/>
+		<Footer />
 	</div>
 );
 
