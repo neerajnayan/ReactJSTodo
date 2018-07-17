@@ -1,10 +1,12 @@
 import React from "react";
+import { connect } from "react-redux";
+
 import { addTodo } from "../actions";
 
 //Function component that does not have this
 //also receive context, but as second argument.
 //Extracting store from that context
-const AddTodo = (props, { store }) => {
+const AddTodo = ({ dispatch }) => {
 	let input;
 
 	return (
@@ -16,7 +18,7 @@ const AddTodo = (props, { store }) => {
 			/>
 			<button
 				onClick={() => {
-					store.dispatch(addTodo(input.value));
+					dispatch(addTodo(input.value));
 					input.value = "";
 				}}
 			>
@@ -26,10 +28,4 @@ const AddTodo = (props, { store }) => {
 	);
 };
 
-// This must be declared for context
-// to work correctly.
-AddTodo.contextTypes = {
-	store: React.PropTypes.object
-};
-
-export default AddTodo;
+export default connect()(AddTodo);
