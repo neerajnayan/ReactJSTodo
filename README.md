@@ -1,11 +1,11 @@
 # Todo App using React Redux Webpack
 
-Yet another Todo app using React Redux and Webpack. 
+Yet another Todo app using React Redux and Webpack.
 
-The content is based on the example in the 
-[great Redux tutorial 'Building React Applications with Idiomatic Redux' by Dan Abramov](https://egghead.io/lessons/javascript-redux-simplifying-the-arrow-functions).
+The content is based on the example in the great Redux tutorial
 
-The aim here was to keep it *really* simple to get started with these technologies.
+1.  ['Getting Started with Redux' by Dan Abramov](https://egghead.io/lessons/react-redux-passing-the-store-down-explicitly-via-props) -> Branch [getting_started](neerajnayan/ReactJSTodo/tree/getting_started)
+2.  ['Building React Applications with Idiomatic Redux' by Dan Abramov](https://egghead.io/lessons/javascript-redux-simplifying-the-arrow-functions). -> Branch [master](neerajnayan/ReactJSTodo/tree/master)
 
 ## Deps
 
@@ -25,9 +25,9 @@ This repository is meant to be used with npm 3. For version 2 also install:
     node_modules/.bin/webpack-dev-server --hot --inline
 
 ## Run
-    
+
     npm start
 
 ## Launch
-    
+
     http://localhost:8080/
