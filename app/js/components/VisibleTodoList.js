@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
 import TodoList from "./TodoList";
 import { toggleTodo } from "../actions";
 
@@ -13,31 +15,19 @@ const getVisibleTodos = (todos, filter) => {
 	}
 };
 
-export default class VisibleTodoList extends Component {
-	componentDidMount() {
-		const { store } = this.context;
-		this.unsubscribe = store.subscribe(() => this.forceUpdate());
-	}
-
-	componentWillUnmount() {
-		this.unsubscribe();
-	}
-
-	render() {
-		const props = this.props;
-		const { store } = this.context;
-		const state = store.getState();
-		return (
-			<TodoList
-				todos={getVisibleTodos(state.todos, state.visibilityFilter)}
-				onTodoClick={id => store.dispatch(toggleTodo(id))}
-			/>
-		);
-	}
-}
-
-// This must be declared for context
-// to work correctly.
-VisibleTodoList.contextTypes = {
-	store: React.PropTypes.object
+const mapStateToProps = state => {
+	return {
+		todos: getVisibleTodos(state.todos, state.visibilityFilter)
+	};
 };
+
+const mapDispatchToProps = dispatch => {
+	return {
+		onTodoClick: id => dispatch(toggleTodo(id))
+	};
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(TodoList);
