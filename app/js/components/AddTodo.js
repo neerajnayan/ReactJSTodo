@@ -1,8 +1,7 @@
 import React from "react";
 import { addTodo } from "../actions";
-import store from "../store";
 
-const AddTodo = () => {
+const AddTodo = ({ store }) => {
 	let input;
 
 	return (
